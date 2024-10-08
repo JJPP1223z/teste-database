@@ -1,0 +1,548 @@
+/* Estilos principais */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    color: #ffffff;
+    background-image: url('euiela2.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-family: 'Pacifico', cursive;
+}
+
+.filter {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.suggestions {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    z-index: 1;
+    width: calc(100% - 20px);
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.suggestions div {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.suggestions div img {
+    width: 50px;
+    height: 75px;
+    margin-right: 10px;
+}
+
+.suggestions div:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilo da lista de filmes */
+#listaFilmes {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+#listaFilmes li {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo preto */
+    border-radius: 15px; /* Bordas arredondadas */
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    justify-content: space-between; /* Espaço uniforme entre pôster, texto e botões */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Sombra preta */
+}
+
+#listaFilmes li:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Efeito de destaque ao passar o mouse */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.9); /* Sombra mais forte ao passar o mouse */
+}
+
+/* Pôster dos filmes */
+#listaFilmes li img {
+    width: 50px;
+    height: 75px;
+    margin-right: 10px;
+}
+
+/* Informações do filme */
+.filme-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #ffffff;
+    flex-grow: 1; /* Faz com que o texto preencha o espaço */
+    align-items: flex-start;
+    justify-content: flex-start; /* Move o nome do filme para o topo */
+}
+
+.filme-info h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap; /* Evita quebra de linha no nome do filme */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Trunca o nome se for muito longo */
+    margin-bottom: 10px; /* Espaço entre o nome e os botões */
+}
+
+/* Botões "Dar Nota", "Assistido", "Editar" e "Remover" */
+.botoes {
+    display: flex;
+    gap: -20px; /* Menor espaço entre os botões */
+}
+
+.nota-button, .assistido-button, .editar-button, .remover-button {
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo sutil */
+    border: 2px solid #fff; /* Borda branca */
+    padding: 4px 8px; /* Botões mais compactos */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de mão ao passar o mouse */
+    color: #fff; /* Texto branco */
+    font-size: 12px; /* Tamanho da fonte reduzido */
+    font-family: Arial, sans-serif; /* Fonte sutil */
+    transition: background-color 0.3s, color 0.3s; /* Transições para fundo e cor do texto */
+}
+
+.nota-button:hover, .assistido-button:hover, .editar-button:hover, .remover-button:hover {
+    background-color: #fff; /* Fundo branco ao passar o mouse */
+    color: #000; /* Texto preto */
+}
+
+/* Classe de filme assistido (fundo verde escuro) */
+#listaFilmes li.assistido {
+    background-color: rgba(0, 128, 0, 0.6); /* Fundo verde escuro */
+    box-shadow: 0px 6px 15px rgba(0, 128, 0, 0.5); /* Sombra verde */
+}
+
+/* Animação de fade-in */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Removendo fundo do container de filmes */
+#filmesContainer {
+    margin-top: 210px;
+    padding: 15px;
+    border-radius: 10px;
+    background: none; /* Remove o fundo preto */
+}
+
+#filmesContainer h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    body {
+        padding: 5px;
+    }
+
+    input {
+        width: calc(100% - 10px);
+        font-size: 14px; /* Tamanho da fonte reduzido */
+    }
+
+    .suggestions {
+        width: 100%;
+    }
+
+    #listaFilmes li {
+        flex-direction: column; /* Empilha os elementos no mobile */
+        align-items: flex-start; /* Alinha à esquerda */
+        padding: 8px; /* Reduzir o padding do item da lista */
+    }
+
+    .filme-info {
+        text-align: center; /* Centraliza o texto no mobile */
+        margin-bottom: 5px; /* Espaço entre o título e a nota */
+    }
+
+    .nota-e-botoes {
+        display: flex; /* Alinha nota e botões em linha */
+        justify-content: space-between; /* Espaço uniforme entre nota e botões */
+        width: 100%; /* Botões ocupam toda a largura */
+        margin-top: 5px; /* Espaço acima dos botões */
+    }
+
+    .botoes {
+        flex-direction: row; /* Mantém os botões em linha */
+        justify-content: space-between; /* Espaço uniforme entre os botões */
+        width: 100%; /* Botões ocupam toda a largura */
+    }
+
+    .nota-input {
+        width: 40px; /* Ajuste a largura conforme necessário */
+        padding: 5px; /* Padding para o input */
+        border: 1px solid rgba(255, 255, 255, 0.7); /* Borda do input */
+        border-radius: 5px; /* Bordas arredondadas */
+        background-color: rgba(0, 0, 0, 0.7); /* Fundo do input */
+        color: #ffffff; /* Cor do texto */
+        font-size: 14px; /* Tamanho da fonte */
+        margin-right: 5px; /* Espaço entre a nota e o botão */
+    }
+}
+.nota-input {
+    -moz-appearance: textfield; /* Remove as setas no Firefox */
+    appearance: textfield; /* Remove as setas no Chrome e Safari */
+}
+
+.nota-input::-webkit-outer-spin-button,
+.nota-input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Remove as setas no Chrome e Safari */
+    margin: 0; /* Remove margens se houver */
+}
+
+/* Ajuste na barra de pesquisa para dispositivos móveis */
+@media (max-width: 600px) {
+    input {
+        width: calc(100% - 20px); /* Ajusta a largura da barra de pesquisa */
+        font-size: 14px; /* Tamanho da fonte reduzido */
+    }
+
+    .suggestions {
+        width: calc(100% - 20px); /* Ajusta a largura das sugestões */
+    }
+}
+
+.filtro label {
+    font-family: Arial, sans-serif; /* Fonte padrão e minimalista */
+    color: #ffffff; /* Cor do texto dos rótulos */
+    display: flex; /* Flex para centralizar os checkbox e texto */
+    align-items: center; /* Alinha verticalmente */
+    cursor: pointer; /* Cursor de mão ao passar o mouse */
+}
+
+@media (min-width: 769px) { /* Para telas maiores que 768px */
+    body {
+        background-image: url('589185.jpg'); /* Substitua pelo caminho da sua imagem */
+        background-size: cover; /* Cobre todo o fundo */
+        background-position: center; /* Centraliza a imagem */
+        background-repeat: no-repeat; /* Não repete a imagem */
+        color: white; /* Altera a cor do texto para branco, se necessário */
+    }
+
+    h1, h2 {
+        color: white; /* Títulos também podem ter a cor alterada */
+    }
+}
+/* Estilo da lista de filmes */
+#listaFilmes {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    background-color: transparent; /* Deixa o fundo da lista transparente */
+}
+
+#listaFilmes li {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border-radius: 15px; /* Bordas arredondadas */
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    justify-content: space-between; /* Espaço uniforme entre pôster, texto e botões */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+#listaFilmes li:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* Efeito de destaque ao passar o mouse */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5); /* Sombra mais forte ao passar o mouse */
+}
+/* Estilo da lista de filmes */
+#listaFilmes {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    background-color: rgba(0, 0, 0, 0); /* Fundo transparente */
+}
+
+#listaFilmes li {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo preto, você pode ajustar se necessário */
+    border-radius: 15px; /* Bordas arredondadas */
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    justify-content: space-between; /* Espaço uniforme entre pôster, texto e botões */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Sombra preta */
+}
+
+/* Pôster dos filmes */
+#listaFilmes li img {
+    width: 50px;
+    height: 75px;
+    margin-right: 10px;
+}
+
+/* Informações do filme */
+.filme-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #ffffff;
+    flex-grow: 1; /* Faz com que o texto preencha o espaço */
+    align-items: flex-start;
+    justify-content: flex-start; /* Move o nome do filme para o topo */
+}
+
+.filme-info h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap; /* Evita quebra de linha no nome do filme */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Trunca o nome se for muito longo */
+    margin-bottom: 10px; /* Espaço entre o nome e os botões */
+}
+
+/* Botões "Dar Nota", "Assistido", "Editar" e "Remover" */
+.nota-input {
+    width: 50px; /* Ajuste a largura conforme necessário */
+    padding: 5px; /* Padding para o input */
+    border: 1px solid rgba(255, 255, 255, 0.7); /* Borda do input */
+    border-radius: 5px; /* Bordas arredondadas */
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    color: #000; /* Texto preto */
+    font-size: 14px; /* Tamanho da fonte */
+    margin-right: 5px; /* Espaço entre a nota e o botão */
+}
+
+.nota-button, .assistido-button, .editar-button, .remover-button {
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda branca sutil */
+    padding: 4px 8px; /* Botões mais compactos */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de mão ao passar o mouse */
+    color: #000; /* Texto preto */
+    font-size: 12px; /* Tamanho da fonte reduzido */
+    font-family: Arial, sans-serif; /* Fonte sutil */
+    transition: background-color 0.3s, color 0.3s; /* Transições para fundo e cor do texto */
+}
+
+.nota-button:hover, .assistido-button:hover, .editar-button:hover, .remover-button:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* Fundo mais claro ao passar o mouse */
+    color: #000; /* Mantém o texto preto ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    /* Nenhuma alteração na versão mobile */
+}
+/* Estilos para o contêiner da lista de filmes */
+#filmesContainer {
+    margin-top: 210px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5); /* Fundo com opacidade para o contêiner */
+    position: relative; /* Permite posicionar elementos absolutos se necessário */
+}
+
+/* Estilizando a lista de filmes */
+#listaFilmes {
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+    max-height: 400px; /* Altura máxima para a lista */
+    padding: 10px; /* Padding interno para espaçamento */
+    background-image: url('euiela2.jpg'); /* Imagem de fundo */
+    background-size: cover; /* Cobre todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+/* Estilo para cada item da lista */
+#listaFilmes li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px; /* Espaçamento entre os itens */
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo sutil para os itens */
+    border-radius: 5px; /* Bordas arredondadas nos itens */
+}
+
+/* Estilizando as imagens dos filmes */
+#listaFilmes img {
+    width: 100px; /* Largura da imagem */
+    height: auto; /* Altura automática para manter a proporção */
+}
+
+/* Estilizando a barra de rolagem */
+#listaFilmes::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+}
+
+#listaFilmes::-webkit-scrollbar-thumb {
+    background: #888; /* Cor da barra de rolagem */
+    border-radius: 10px; /* Arredondamento da barra */
+}
+
+#listaFilmes::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cor ao passar o mouse */
+}
+/* Estilo para o contêiner da lista de filmes */
+#listaFilmes {
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+    max-height: 400px; /* Altura máxima para a lista */
+    padding: 10px; /* Padding interno para espaçamento */
+    background-image: url('euiela2.jpg'); /* Imagem de fundo */
+    background-size: cover; /* Cobre todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+/* Estilizando a barra de rolagem */
+#listaFilmes::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+}
+
+#listaFilmes::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.7); /* Cor de fundo do caminho da barra de rolagem */
+}
+
+#listaFilmes::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5); /* Cor de fundo do "thumb" */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+#listaFilmes::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.8); /* Cor ao passar o mouse */
+}
+
+/* Adicionando a imagem como fundo da barra de rolagem */
+#listaFilmes {
+    position: relative;
+}
+
+#listaFilmes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('euiela2.jpg'); /* Imagem de fundo */
+    opacity: 0.5; /* Ajuste a opacidade se necessário */
+    pointer-events: none; /* Permite que a barra de rolagem funcione normalmente */
+    z-index: -1; /* Coloca a imagem atrás do conteúdo */
+}
+#listaFilmes::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+}
+
+#listaFilmes::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0); /* Torna o fundo da trilha transparente */
+}
+
+#listaFilmes::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5); /* Cor do "thumb", você pode ajustar a opacidade */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+#listaFilmes::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.8); /* Cor ao passar o mouse */
+}
+/* Usando opacity */
+.scrollbar {
+    opacity: 0.0; /* 50% de transparência */
+}
+
+/* Usando rgba */
+.scrollbar {
+    background-color: rgba(255, 255, 255, 0); /* 50% de transparência */
+}
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button.assistido {
+    background-color: #eff5f000;
+    color: white;
+}
+
+.button.assistido:hover {
+    background-color: #a2b4a600;
+}
+
+.button.remover {
+    background-color: #dc354600;
+    color: white;
+}
+
+.button.remover:hover {
+    background-color: #ffffff00;
+}
+

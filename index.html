@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Filmes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .emoji {
+            height: 1.5em; /* Aumenta o tamanho para ser maior que o texto */
+            vertical-align: middle; /* Alinha ao meio do texto */
+        }
+        /* Remove setas da caixa de nota */
+        .nota-input {
+            -moz-appearance: textfield; /* Remove as setas no Firefox */
+            appearance: textfield; /* Remove as setas no Chrome e Safari */
+        }
+        .nota-input::-webkit-outer-spin-button,
+        .nota-input::-webkit-inner-spin-button {
+            -webkit-appearance: none; /* Remove as setas no Chrome e Safari */
+            margin: 0; /* Remove margens se houver */
+        }
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            .emoji {
+                height: 2em; /* Tamanho um pouco maior para dispositivos móveis */
+            }
+        }
+        /* Estilo para contadores e caixas de seleção */
+        .filtro-container {
+            margin: 20px 0;
+            display: flex; /* Disposição horizontal */
+            justify-content: flex-start; /* Alinha à esquerda */
+        }
+        .filtro-container label {
+            margin-right: 15px;
+            font-family: Arial, sans-serif; /* Fonte padrão e minimalista */
+            color: #ffffff; /* Cor do texto */
+            cursor: pointer; /* Muda o cursor ao passar o mouse */
+        }
+        .filtro-container input[type="checkbox"] {
+            margin-right: 5px; /* Espaço entre checkbox e texto */
+        }
+    </style>
+</head>
+<body>
+    <h1>Séries/Filmes com meu gatinho 💖 <img src="euiela.png" alt="emoji" class="emoji"> </h1> 
+    <div class="filter">
+        <input type="text" id="filmeInput" placeholder="Pesquise um filme...">
+        <div id="suggestions" class="suggestions"></div>
+    </div>
+    <!-- Contêiner para a lista de filmes -->
+    <div id="filmesContainer">
+        <h2>Lista de filmes</h2>
+        <!-- Filtros abaixo do título -->
+        <div class="filtro-container">
+            <label>
+                <input type="checkbox" id="assistidosCheckbox"> Assistidos (<span id="assistidosCount">0</span>)
+            </label>
+            <label>
+                <input type="checkbox" id="seriesCheckbox"> Séries (<span id="seriesCount">0</span>)
+            </label>
+            <label>
+                <input type="checkbox" id="filmesCheckbox"> Filmes (<span id="filmesCount">0</span>)
+            </label>
+        </div>
+        
+        <ul id="listaFilmes"></ul>
+    </div>
+    
+    <div id="feedback"></div> <!-- Div para feedback ao usuário -->
+    
+    <script src="script.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+      
+        const firebaseConfig = {
+          apiKey: "AIzaSyBLJlE2K4afBT5Bf-HF2HiJ_qjmBjN8BGw",
+          authDomain: "filmes-natt.firebaseapp.com",
+          databaseURL: "https://filmes-natt-default-rtdb.firebaseio.com",
+          projectId: "filmes-natt",
+          storageBucket: "filmes-natt.appspot.com",
+          messagingSenderId: "731003931679",
+          appId: "1:731003931679:web:d6bd5bd0cfe0714f23192a"
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+      
+        // Função de login
+        function login(email, password) {
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Login bem-sucedido
+              const user = userCredential.user;
+              console.log('Usuário logado:', user);
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.error('Erro no login:', errorCode, errorMessage);
+            });
+        }
+      </script>
+      
+</body>
+</html>
